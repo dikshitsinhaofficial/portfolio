@@ -69,18 +69,17 @@
 }
 
 .skill-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--border-color);
     padding: 1.5rem;
     text-align: center;
     border-radius: 12px;
     font-weight: 600;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid var(--border-color);
     transition: var(--transition);
 }
 
 .skill-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
     border-color: var(--primary-color);
 }
 
@@ -96,7 +95,7 @@
     border-radius: 16px;
     overflow: hidden;
     transition: var(--transition);
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid var(--border-color);
 }
 
 .project-card:hover {
@@ -136,7 +135,7 @@
 }
 
 .tag {
-    background: rgba(59, 130, 246, 0.1);
+    background: var(--border-color);
     color: var(--primary-color);
     padding: 0.2rem 0.8rem;
     border-radius: 20px;

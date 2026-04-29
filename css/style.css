@@ -1,13 +1,24 @@
 :root {
-    --bg-color: #0f172a;
+    --bg-color: #050505;
     --text-color: #f8fafc;
     --text-muted: #94a3b8;
     --primary-color: #3b82f6;
     --primary-hover: #2563eb;
-    --secondary-bg: #1e293b;
+    --secondary-bg: #111111;
     --accent: #10b981;
+    --navbar-bg: rgba(5, 5, 5, 0.8);
+    --border-color: rgba(255, 255, 255, 0.05);
     --font-main: 'Inter', sans-serif;
     --transition: all 0.3s ease;
+}
+
+body.light-mode {
+    --bg-color: #ffffff;
+    --text-color: #0f172a;
+    --text-muted: #475569;
+    --secondary-bg: #f8fafc;
+    --navbar-bg: rgba(255, 255, 255, 0.9);
+    --border-color: rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -71,14 +82,14 @@ a {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(15, 23, 42, 0.8);
+    background: var(--navbar-bg);
     backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
     z-index: 1000;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .logo {
@@ -106,6 +117,6 @@ a {
 footer {
     text-align: center;
     padding: 2rem 0;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid var(--border-color);
     color: var(--text-muted);
 }
