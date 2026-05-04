@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // Intersection Observer for scroll animations
-    const faders = document.querySelectorAll('.section, .skill-card, .project-card');
+    const faders = document.querySelectorAll('.section, .skill-card, .project-card, .achievement-card, .cert-card');
 
     const appearOptions = {
         threshold: 0.1,
