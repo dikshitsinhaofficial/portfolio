@@ -1,4 +1,4 @@
-/* Buttons */
+﻿/* Buttons */
 .btn {
     display: inline-block;
     padding: 0.8rem 2rem;
@@ -61,28 +61,60 @@
     position: relative;
 }
 
-/* Skills Grid */
+/* Skills Section */
+.skills-category {
+    margin-bottom: 3.5rem;
+}
+
+.skills-category:last-child {
+    margin-bottom: 0;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    text-align: center;
+    font-weight: 600;
+}
+
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 1.5rem;
+    justify-items: center;
 }
 
 .skill-card {
-    background: var(--border-color);
-    padding: 1.5rem;
+    background: var(--secondary-bg);
+    padding: 1.5rem 1rem;
     text-align: center;
     border-radius: 12px;
     font-weight: 600;
     border: 1px solid var(--border-color);
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 180px;
 }
 
 .skill-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     border-color: var(--primary-color);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.15);
 }
 
+.skill-icon {
+    font-size: 3rem;
+}
+
+.skill-card span {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
 /* Projects Grid */
 .projects-grid {
     display: grid;
@@ -142,3 +174,62 @@
     font-size: 0.85rem;
     font-weight: 600;
 }
+
+
+/* Achievements & Certifications Grids */
+.achievements-grid, .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.achievement-card, .cert-card {
+    background: var(--secondary-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+}
+
+.cert-card {
+    background: var(--bg-color);
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.achievement-card:hover, .cert-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.15);
+}
+
+.ach-icon, .cert-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.achievement-card h4, .cert-card h4 {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.2rem;
+}
+
+.achievement-card p, .cert-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.cert-date {
+    margin-top: auto;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    padding-top: 1rem;
+}
+

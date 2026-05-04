@@ -41,4 +41,56 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('theme', 'dark');
         }
     });
+
+    // Contact Form Logic
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const statusDiv = document.getElementById('form-status');
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+            
+            // UI feedback
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            statusDiv.style.display = 'none';
+            
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                statusDiv.style.display = 'block';
+                if (response.ok) {
+                    statusDiv.textContent = '✅ Message sent successfully!';
+                    statusDiv.style.color = 'var(--accent)';
+                    contactForm.reset();
+                } else {
+                    statusDiv.textContent = '❌ ' + (result.error || 'Failed to send message.');
+                    statusDiv.style.color = '#ef4444'; // Red color
+                }
+            } catch (error) {
+                statusDiv.style.display = 'block';
+                statusDiv.textContent = '❌ An error occurred. Please try again.';
+                statusDiv.style.color = '#ef4444';
+            } finally {
+                submitBtn.textContent = 'Send Message';
+                submitBtn.disabled = false;
+            }
+        });
+    }
 });
