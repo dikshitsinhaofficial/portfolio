@@ -1,9 +1,37 @@
-/* Hero Background Orb Animation */
+/* ============================================
+   SCROLL PROGRESS BAR
+   ============================================ */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(to right, #3b82f6, #10b981);
+    z-index: 9999;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.7);
+}
+
+/* ============================================
+   HERO SECTION — PARTICLE CANVAS
+   ============================================ */
+#particle-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ============================================
+   HERO BACKGROUND ORB
+   ============================================ */
 .background-orb {
     position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, rgba(15, 23, 42, 0) 70%);
     border-radius: 50%;
     top: 50%;
     left: 50%;
@@ -14,12 +42,96 @@
 }
 
 @keyframes float {
-    0% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -60%) scale(1.1); }
+    0%   { transform: translate(-50%, -50%) scale(1); }
+    50%  { transform: translate(-50%, -60%) scale(1.12); }
     100% { transform: translate(-50%, -50%) scale(1); }
 }
 
-/* Scroll Fade In Animation Classes (triggered by JS) */
+/* ============================================
+   HERO TITLE — SLIDE IN FROM LEFT
+   ============================================ */
+.hero-title {
+    animation: slideInLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-subtitle {
+    animation: slideInLeft 0.9s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-section .btn {
+    animation: slideInLeft 0.9s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ============================================
+   TYPEWRITER BLINKING CURSOR
+   ============================================ */
+.cursor-blink {
+    display: inline-block;
+    color: var(--primary-color);
+    font-weight: 300;
+    animation: blink 0.8s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
+/* ============================================
+   HERO CTA BUTTON — PULSE GLOW
+   ============================================ */
+.btn-primary {
+    animation: pulse-glow 2.5s 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
+    50%       { box-shadow: 0 4px 30px rgba(59, 130, 246, 0.8), 0 0 0 6px rgba(59, 130, 246, 0.15); }
+}
+
+/* ============================================
+   NAVBAR — ACTIVE LINK
+   ============================================ */
+.nav-links a.active {
+    color: var(--primary-color);
+    position: relative;
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #3b82f6, #10b981);
+    border-radius: 2px;
+    animation: slideInWidth 0.3s ease forwards;
+}
+
+@keyframes slideInWidth {
+    from { width: 0; }
+    to   { width: 100%; }
+}
+
+/* ============================================
+   NAVBAR — SHRINK ON SCROLL
+   ============================================ */
+.navbar.scrolled {
+    padding: 0.5rem 5%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ============================================
+   SCROLL FADE IN (triggered by JS)
+   ============================================ */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -29,4 +141,79 @@
 .fade-in.appear {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ============================================
+   SECTION TITLES — UNDERLINE GROW ON APPEAR
+   ============================================ */
+.section-title {
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(to right, #3b82f6, #10b981);
+    border-radius: 2px;
+    transition: width 0.6s ease;
+}
+
+.section.appear .section-title::after,
+.dark-bg.appear .section-title::after {
+    width: 60px;
+}
+
+/* ============================================
+   SKILL CARDS — FLIP ON HOVER
+   ============================================ */
+.skill-card {
+    perspective: 600px;
+}
+
+.skill-card:hover .skill-icon {
+    animation: iconSpin 0.5s ease;
+}
+
+@keyframes iconSpin {
+    0%   { transform: rotateY(0deg) scale(1); }
+    50%  { transform: rotateY(90deg) scale(1.2); }
+    100% { transform: rotateY(0deg) scale(1); }
+}
+
+/* ============================================
+   PROJECT CARDS — 3D TILT (enhanced by JS)
+   ============================================ */
+.project-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* ============================================
+   LOGO — COLOR SHIMMER
+   ============================================ */
+.logo {
+    background: linear-gradient(90deg, #f8fafc, #3b82f6, #10b981, #f8fafc);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+    0%   { background-position: 0% center; }
+    100% { background-position: 300% center; }
+}
+
+/* ============================================
+   SECTION ENTRY — SLIDE UP (staggered children)
+   ============================================ */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to   { opacity: 1; transform: translateY(0); }
 }

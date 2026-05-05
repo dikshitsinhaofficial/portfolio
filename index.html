@@ -17,6 +17,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
     <nav class="navbar">
         <div class="logo">Dikshit Sinha</div>
         <ul class="nav-links">
@@ -32,10 +34,11 @@
     <header id="hero" class="section hero-section">
         <div class="container">
             <h1 class="hero-title">Hi, I'm <span class="highlight">Dikshit Sinha</span></h1>
-            <p class="hero-subtitle">Computer Science Graduate & Passionate Software Developer.</p>
+            <p class="hero-subtitle"><span id="typewriter"></span><span class="cursor-blink">|</span></p>
             <a href="#projects" class="btn btn-primary">View My Work</a>
         </div>
         <div class="background-orb"></div>
+        <canvas id="particle-canvas"></canvas>
     </header>
 
     <section id="about" class="section">
