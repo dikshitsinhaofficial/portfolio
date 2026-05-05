@@ -1,4 +1,4 @@
-﻿/* Buttons */
+/* Buttons */
 .btn {
     display: inline-block;
     padding: 0.8rem 2rem;
@@ -177,59 +177,98 @@
 
 
 /* Achievements & Certifications Grids */
+@keyframes cardPopIn {
+    0%   { opacity: 0; transform: translateY(30px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 .achievements-grid, .certifications-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 2rem;
 }
 
 .achievement-card, .cert-card {
     background: var(--secondary-bg);
     padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    transition: var(--transition);
+    border-radius: 16px;
+    border: 2px solid var(--primary-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
     height: 100%;
+    animation: cardPopIn 0.5s ease both;
 }
+
+/* Stagger animation delays for each card */
+.achievement-card:nth-child(1), .cert-card:nth-child(1) { animation-delay: 0.05s; }
+.achievement-card:nth-child(2), .cert-card:nth-child(2) { animation-delay: 0.15s; }
+.achievement-card:nth-child(3), .cert-card:nth-child(3) { animation-delay: 0.25s; }
+.achievement-card:nth-child(4), .cert-card:nth-child(4) { animation-delay: 0.35s; }
+.achievement-card:nth-child(5), .cert-card:nth-child(5) { animation-delay: 0.45s; }
+.achievement-card:nth-child(6), .cert-card:nth-child(6) { animation-delay: 0.55s; }
 
 .cert-card {
-    background: var(--bg-color);
     text-decoration: none;
     color: var(--text-color);
+    border-color: var(--accent);
 }
 
-.achievement-card:hover, .cert-card:hover {
+.achievement-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25);
+}
+
+.cert-card:hover {
     transform: translateY(-8px);
     border-color: var(--primary-color);
-    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.15);
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.25);
 }
 
 .ach-icon, .cert-icon {
     font-size: 3rem;
-    margin-bottom: 0.5rem;
 }
 
 .achievement-card h4, .cert-card h4 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--text-color);
-    margin-bottom: 0.2rem;
+    font-weight: 700;
 }
 
 .achievement-card p, .cert-card p {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+}
+
+.cert-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .cert-date {
     margin-top: auto;
-    font-size: 0.85rem;
-    color: var(--primary-color);
+    font-size: 0.8rem;
+    background: var(--primary-color);
+    color: #fff;
     font-weight: 600;
-    padding-top: 1rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    margin-top: 0.75rem;
 }
 
+.cert-link {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: var(--transition);
+    border-bottom: 1px dashed var(--border-color);
+}
+.cert-link:hover {
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+}
