@@ -1,70 +1,70 @@
-const express = require('express');
-const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
+require("dotenv").config();
+
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const path = require("path");
 
 const app = express();
 const PORT = 3000;
-const DATA_FILE = path.join(__dirname, 'contacts.json');
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-// Serve static files from the current directory so index.html, css/, js/ load
 app.use(express.static(__dirname));
 
-// Ensure the JSON file exists
-if (!fs.existsSync(DATA_FILE)) {
-    fs.writeFileSync(DATA_FILE, JSON.stringify([]));
-}
+// MongoDB Connection
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log(err));
 
-// Endpoint to handle form submission
-app.post('/api/contact', (req, res) => {
+// Contact Schema
+const contactSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  message: String,
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+// Contact Model
+const Contact = mongoose.model("Contact", contactSchema);
+
+// API Route
+app.post("/api/contact", async (req, res) => {
+  try {
     const { name, email, message } = req.body;
 
     if (!name || !email || !message) {
-        return res.status(400).json({ error: 'All fields are required.' });
+      return res.status(400).json({
+        error: "All fields are required.",
+      });
     }
 
-    const newContact = {
-        id: Date.now(),
-        name,
-        email,
-        message,
-        date: new Date().toISOString()
-    };
-
-    // Read existing data
-    fs.readFile(DATA_FILE, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading file:', err);
-            return res.status(500).json({ error: 'Failed to read data.' });
-        }
-
-        let contacts = [];
-        try {
-            if (data) {
-                contacts = JSON.parse(data);
-            }
-        } catch (parseErr) {
-            console.error('Error parsing JSON:', parseErr);
-        }
-
-        // Add new contact
-        contacts.push(newContact);
-
-        // Write back to file
-        fs.writeFile(DATA_FILE, JSON.stringify(contacts, null, 2), (writeErr) => {
-            if (writeErr) {
-                console.error('Error writing to file:', writeErr);
-                return res.status(500).json({ error: 'Failed to save data.' });
-            }
-
-            res.status(201).json({ message: 'Message sent successfully!' });
-        });
+    // Save to MongoDB
+    const newContact = new Contact({
+      name,
+      email,
+      message,
     });
+
+    await newContact.save();
+
+    res.status(201).json({
+      message: "Message sent successfully!",
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      error: "Server Error",
+    });
+  }
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
