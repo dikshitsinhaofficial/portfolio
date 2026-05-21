@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0a122c"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </radialGradient>
+    
+    <!-- Neon Cyber Gradient -->
+    <linearGradient id="cyberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+
+    <!-- Gold Accent Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Base Badge Background -->
+  <circle cx="256" cy="256" r="230" fill="url(#bgGrad)" stroke="url(#cyberGrad)" stroke-width="6" filter="url(#neonGlow)"/>
+  
+  <!-- Circuit Background Lines -->
+  <g opacity="0.2" stroke="#06b6d4" stroke-width="2" fill="none">
+    <path d="M 120,256 L 200,256 L 230,226 L 230,170"/>
+    <path d="M 392,256 L 312,256 L 282,286 L 282,342"/>
+    <circle cx="120" cy="256" r="4" fill="#06b6d4"/>
+    <circle cx="392" cy="256" r="4" fill="#06b6d4"/>
+    <circle cx="230" cy="170" r="4" fill="#06b6d4"/>
+    <circle cx="282" cy="342" r="4" fill="#06b6d4"/>
+  </g>
+
+  <!-- Outer Tech Ring -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#1e293b" stroke-dasharray="10 15" stroke-width="4"/>
+  
+  <!-- Cyber Shield -->
+  <g filter="url(#neonGlow)">
+    <path d="M 256,120 
+             C 320,120 360,135 360,135 
+             C 360,135 370,250 330,320 
+             C 300,370 256,395 256,395 
+             C 256,395 212,370 182,320 
+             C 142,250 152,135 152,135 
+             C 152,135 192,120 256,120 Z" 
+          fill="none" 
+          stroke="url(#cyberGrad)" 
+          stroke-width="8" 
+          stroke-linejoin="round"/>
+  </g>
+
+  <!-- Inner Shield Guard -->
+  <path d="M 256,145 
+           C 295,145 330,155 330,155 
+           C 330,155 335,235 305,295 
+           C 285,335 256,355 256,355 
+           C 256,355 227,335 207,295 
+           C 177,235 182,155 182,155 
+           C 182,155 217,145 256,145 Z" 
+        fill="rgba(6, 182, 212, 0.05)" 
+        stroke="url(#cyberGrad)" 
+        stroke-width="2" 
+        opacity="0.6"/>
+
+  <!-- Glowing Digital Lock Symbol in Center -->
+  <g filter="url(#neonGlow)">
+    <!-- Lock Shackle -->
+    <path d="M 220,240 V 210 C 220,190 236,174 256,174 C 276,174 292,190 292,210 V 240" 
+          fill="none" 
+          stroke="url(#goldGrad)" 
+          stroke-width="6" 
+          stroke-linecap="round"/>
+    
+    <!-- Lock Body -->
+    <rect x="206" y="235" width="100" height="75" rx="10" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="6"/>
+    
+    <!-- Keyhole -->
+    <circle cx="256" cy="265" r="8" fill="url(#goldGrad)"/>
+    <path d="M 256,273 L 261,293 H 251 Z" fill="url(#goldGrad)"/>
+  </g>
+</svg>
