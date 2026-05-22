@@ -1,15 +1,16 @@
 // main.js - Core functionality
 
 // ============================================================
-// EMAILJS CONFIGURATION — Replace these with your own values
+// EMAILJS CONFIGURATION — Replace with your own values
 // Sign up free at https://www.emailjs.com
 // 1. Create a Service (e.g. Gmail)  → copy Service ID
 // 2. Create an Email Template       → copy Template ID
-// 3. Go to Account → API Keys       → copy Public Key
+//    Template variables needed: {{from_name}}, {{from_email}}, {{message}}
+// 3. Account → API Keys             → copy Public Key
 // ============================================================
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'abc123XYZ'
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_xxxxxx'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xxxxxx'
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -68,26 +69,34 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled    = true;
         statusDiv.style.display = 'none';
 
-        // ── Strategy 1: Try local server (works when running node server.js)
+        // ── Strategy 1: Local Express server (localhost with node server.js)
         const sentViaServer = await trySendViaServer({ name, email, message });
-
         if (sentViaServer) {
             showStatus(statusDiv, '✅ Message sent successfully!', 'var(--accent)');
             contactForm.reset();
-        } else {
-            // ── Strategy 2: Fallback to EmailJS (works on Vercel / any static host)
-            const sentViaEmail = await trySendViaEmailJS({ name, email, message });
-            if (sentViaEmail) {
-                showStatus(statusDiv, '✅ Message sent successfully!', 'var(--accent)');
-                contactForm.reset();
-            } else {
-                showStatus(
-                    statusDiv,
-                    '❌ Could not send message. Please email directly at dikshitsinha186@gmail.com',
-                    '#ef4444'
-                );
-            }
+            submitBtn.textContent = 'Send Message';
+            submitBtn.disabled    = false;
+            return;
         }
+
+        // ── Strategy 2: EmailJS (works on Vercel when configured)
+        const sentViaEmail = await trySendViaEmailJS({ name, email, message });
+        if (sentViaEmail) {
+            showStatus(statusDiv, '✅ Message sent successfully!', 'var(--accent)');
+            contactForm.reset();
+            submitBtn.textContent = 'Send Message';
+            submitBtn.disabled    = false;
+            return;
+        }
+
+        // ── Strategy 3: mailto fallback — always works, opens email client
+        openMailtoFallback({ name, email, message });
+        showStatus(
+            statusDiv,
+            '📧 Your email client has been opened with the message pre-filled. Please press Send there!',
+            'var(--accent)'
+        );
+        contactForm.reset();
 
         submitBtn.textContent = 'Send Message';
         submitBtn.disabled    = false;
@@ -97,34 +106,37 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ── Helpers ──────────────────────────────────────────────── */
 
 function showStatus(el, msg, color) {
-    el.textContent    = msg;
-    el.style.color    = color;
-    el.style.display  = 'block';
+    el.textContent   = msg;
+    el.style.color   = color;
+    el.style.display = 'block';
 }
 
 /**
- * Try to POST to the local Express server.
- * Returns true on success, false on any failure (including network error).
+ * Try POST to local Express server (works on localhost with node server.js).
+ * Returns true on success, false on any failure.
  */
 async function trySendViaServer(data) {
     try {
-        const response = await fetch('/api/contact', {
+        const controller = new AbortController();
+        const timeout    = setTimeout(() => controller.abort(), 4000);
+        const response   = await fetch('/api/contact', {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify(data),
-            signal:  AbortSignal.timeout(5000) // 5-second timeout
+            signal:  controller.signal
         });
+        clearTimeout(timeout);
         if (!response.ok) return false;
         const result = await response.json();
         return !!result.message;
     } catch (_) {
-        return false; // Server not running (e.g. on Vercel) — fall through to EmailJS
+        return false; // Server not running — try next strategy
     }
 }
 
 /**
- * Send via EmailJS (works on any static host, including Vercel).
- * Requires EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID to be configured above.
+ * Send via EmailJS (works on Vercel/static hosting).
+ * Configure EMAILJS_* constants at the top of this file.
  */
 async function trySendViaEmailJS(data) {
     if (typeof emailjs === 'undefined') return false;
@@ -132,21 +144,31 @@ async function trySendViaEmailJS(data) {
         EMAILJS_PUBLIC_KEY  === 'YOUR_PUBLIC_KEY'  ||
         EMAILJS_SERVICE_ID  === 'YOUR_SERVICE_ID'  ||
         EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID'
-    ) {
-        console.warn('EmailJS not configured. Replace placeholder values in js/main.js');
-        return false;
-    }
+    ) return false; // Not configured yet
+
     try {
         await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-            from_name:    data.name,
-            from_email:   data.email,
-            message:      data.message,
-            to_name:      'Dikshit Sinha',
-            reply_to:     data.email,
+            from_name:  data.name,
+            from_email: data.email,
+            message:    data.message,
+            to_name:    'Dikshit Sinha',
+            reply_to:   data.email,
         });
         return true;
     } catch (err) {
         console.error('EmailJS error:', err);
         return false;
     }
+}
+
+/**
+ * Last-resort fallback: open the user's default email client
+ * with name, email and message pre-filled in the body.
+ */
+function openMailtoFallback({ name, email, message }) {
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+    const body    = encodeURIComponent(
+        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    );
+    window.location.href = `mailto:dikshitsinha186@gmail.com?subject=${subject}&body=${body}`;
 }
