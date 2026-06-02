@@ -401,3 +401,256 @@ body.light-mode .form-group input, body.light-mode .form-group textarea {
 body.light-mode .form-group input:focus, body.light-mode .form-group textarea:focus {
     background: rgba(0, 0, 0, 0.04) !important;
 }
+
+/* ============================================
+   FEATURED PROJECT BADGE
+   ============================================ */
+.project-featured {
+    border-color: rgba(139, 92, 246, 0.45) !important;
+    background: linear-gradient(135deg,
+        rgba(139, 92, 246, 0.08) 0%,
+        rgba(6, 182, 212, 0.05) 100%) !important;
+    position: relative;
+}
+
+.project-featured:hover {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 20px 50px rgba(139, 92, 246, 0.25), 0 0 0 1px rgba(139, 92, 246, 0.2) !important;
+}
+
+.project-badge {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent));
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    padding: 0.3rem 0.85rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+    animation: badge-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes badge-pulse {
+    0%, 100% { box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4); }
+    50%       { box-shadow: 0 4px 24px rgba(139, 92, 246, 0.7); }
+}
+
+/* ============================================
+   PROJECT ACTIONS ROW
+   ============================================ */
+.project-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    align-items: center;
+}
+
+/* ── Small button variant ── */
+.btn-sm {
+    padding: 0.5rem 1.25rem !important;
+    font-size: 0.83rem !important;
+    border-radius: 50px !important;
+}
+
+/* ── Certificate button ── */
+.btn-cert {
+    background: var(--glass-bg);
+    color: var(--text-color);
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-cert::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.btn-cert:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(6, 182, 212, 0.25);
+}
+
+.btn-cert:hover::before { opacity: 1; }
+
+/* Saved state — green tint */
+.btn-cert.cert-saved {
+    border-color: #10b981;
+    color: #10b981;
+}
+
+.btn-cert.cert-saved:hover {
+    box-shadow: 0 8px 22px rgba(16, 185, 129, 0.3);
+}
+
+/* ============================================
+   CERTIFICATE MODAL OVERLAY
+   ============================================ */
+.cert-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 1rem;
+}
+
+.cert-modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.cert-modal {
+    background: var(--secondary-bg, #111827);
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(139,92,246,0.15);
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                opacity 0.3s ease;
+}
+
+.cert-modal-overlay.active .cert-modal {
+    transform: translateY(0) scale(1);
+}
+
+.cert-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-muted);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    line-height: 1;
+}
+
+.cert-modal-close:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+    transform: rotate(90deg);
+}
+
+.cert-modal-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 12px rgba(139,92,246,0.4));
+}
+
+.cert-modal h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cert-modal p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.cert-input-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+#cert-link-input {
+    width: 100%;
+    padding: 0.85rem 1.1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(139,92,246,0.3);
+    background: rgba(255,255,255,0.03);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 0.88rem;
+    transition: var(--transition);
+    box-sizing: border-box;
+}
+
+#cert-link-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: rgba(139,92,246,0.06);
+    box-shadow: 0 0 0 3px rgba(139,92,246,0.15);
+}
+
+#cert-link-input::placeholder {
+    color: rgba(156,163,175,0.5);
+    font-size: 0.82rem;
+}
+
+.cert-modal-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cert-modal-hint {
+    font-size: 0.82rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 0 !important;
+    min-height: 1.2em;
+    transition: color 0.3s ease;
+}
+
+/* Light mode adjustments */
+body.light-mode .cert-modal {
+    background: #f8fafc;
+    border-color: rgba(139,92,246,0.25);
+}
+
+body.light-mode #cert-link-input {
+    background: rgba(0,0,0,0.03);
+    color: var(--text-color);
+    border-color: rgba(139,92,246,0.25);
+}
+
+body.light-mode #cert-link-input:focus {
+    background: rgba(139,92,246,0.04);
+}

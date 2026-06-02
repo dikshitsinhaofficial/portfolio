@@ -214,7 +214,35 @@
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <div class="projects-grid">
-                <div class="project-card">
+
+                <!-- ═══ DESI CART — FEATURED ═══ -->
+                <div class="project-card project-featured" id="proj-desicart">
+                    <div class="project-badge">🌟 Featured</div>
+                    <div class="project-info" style="padding: 2.5rem;">
+                        <h3 style="font-size: 1.5rem;">Desi Cart</h3>
+                        <p style="margin-top: 1rem;">A full-scale Indian e-commerce marketplace — like Flipkart &amp; Amazon — where sellers across India can list and sell products to customers worldwide. Features multi-vendor support, real-time inventory management, secure payments, and a seamless shopping experience.</p>
+                        <div class="project-tags" style="margin-top: 1.5rem;">
+                            <span class="tag">React.js</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Express.js</span>
+                            <span class="tag">MongoDB</span>
+                            <span class="tag">Firebase</span>
+                            <span class="tag">JWT Auth</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/dikshitsinhaofficial/Desi-Cart" target="_blank" class="btn btn-primary btn-sm" id="desicart-github">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                                GitHub
+                            </a>
+                            <button class="btn btn-cert btn-sm" data-project="desicart" id="desicart-cert-btn" title="Paste your Google Drive certificate link">
+                                🎓 Certificate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cafe POS -->
+                <div class="project-card" id="proj-cafepos">
                     <div class="project-info" style="padding: 2.5rem;">
                         <h3 style="font-size: 1.4rem;">Cafe POS System</h3>
                         <p style="margin-top: 1rem;">A full-stack café ordering and billing system for managing menus, orders, and payments in real time.</p>
@@ -224,9 +252,16 @@
                             <span class="tag">Express.js</span>
                             <span class="tag">MongoDB</span>
                         </div>
+                        <div class="project-actions">
+                            <button class="btn btn-cert btn-sm" data-project="cafepos" title="Paste your Google Drive certificate link">
+                                🎓 Certificate
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="project-card">
+
+                <!-- Hand Gesture -->
+                <div class="project-card" id="proj-gesture">
                     <div class="project-info" style="padding: 2.5rem;">
                         <h3 style="font-size: 1.4rem;">Hand Gesture Recognition System</h3>
                         <p style="margin-top: 1rem;">A real-time hand gesture recognition system to control PC functions like lights and camera using computer vision.</p>
@@ -237,9 +272,16 @@
                             <span class="tag">Flask</span>
                             <span class="tag">CNN</span>
                         </div>
+                        <div class="project-actions">
+                            <button class="btn btn-cert btn-sm" data-project="gesture" title="Paste your Google Drive certificate link">
+                                🎓 Certificate
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="project-card">
+
+                <!-- Student Management -->
+                <div class="project-card" id="proj-sms">
                     <div class="project-info" style="padding: 2.5rem;">
                         <h3 style="font-size: 1.4rem;">Student Management System</h3>
                         <p style="margin-top: 1rem;">A web application to manage student records with features like add, update, delete, and search for efficient data handling.</p>
@@ -248,8 +290,16 @@
                             <span class="tag">MySQL</span>
                             <span class="tag">HTML/CSS/JS</span>
                         </div>
+                        <div class="project-actions">
+                            <button class="btn btn-cert btn-sm" data-project="sms"
+                                data-cert-url="https://drive.google.com/file/d/1Xb9PvatqG1jvVTA6HFbWOAxqjBRRTJrI/view"
+                                title="View Webskitters Academy Certificate">
+                                🎓 Certificate
+                            </button>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -287,7 +337,7 @@
             <h2 class="section-title">Certifications</h2>
             <p class="text-center" style="margin-bottom: 3rem; color: var(--text-muted);">Click on any certificate to view it.</p>
             <div class="certifications-grid">
-                <a href="#" target="_blank" class="cert-card">
+                <a href="https://drive.google.com/file/d/13Z5ZK98NSZjYhsE1qBbkql5w1QVOC2W9/view?usp=sharing" target="_blank" class="cert-card">
                     <img src="img/web_dev_intern.png" alt="Web Dev Internship Badge" class="cert-img">
                     <div class="cert-content">
                         <h4>Web Development Internship</h4>
@@ -295,7 +345,7 @@
                         <span class="cert-date">Aug 2025</span>
                     </div>
                 </a>
-                <a href="#" target="_blank" class="cert-card">
+                <a href="https://drive.google.com/file/d/1Xb9PvatqG1jvVTA6HFbWOAxqjBRRTJrI/view" target="_blank" class="cert-card">
                     <img src="img/web_dev_training.png" alt="Web Dev Industrial Training Badge" class="cert-img">
                     <div class="cert-content">
                         <h4>Web Development Industrial Training</h4>
@@ -303,7 +353,7 @@
                         <span class="cert-date">Sep 2022</span>
                     </div>
                 </a>
-                <a href="#" target="_blank" class="cert-card">
+                <a href="https://drive.google.com/file/d/1Kih4f7oJZZncNwSVluJFWoDbUKR2t5dW/view" target="_blank" class="cert-card">
                     <img src="img/mongodb_badge.png" alt="Introduction to MongoDB Badge" class="cert-img">
                     <div class="cert-content">
                         <h4>Introduction to MongoDB</h4>
@@ -311,7 +361,7 @@
                         <span class="cert-date">Jul 2024</span>
                     </div>
                 </a>
-                <a href="#" target="_blank" class="cert-card">
+                <a href="https://drive.google.com/file/d/1e1iiCTeT7t7xeK7ILd1aDIrjC9lK3VAD/view" target="_blank" class="cert-card">
                     <img src="img/cisco_cyber_badge.svg" alt="Introduction to Cybersecurity Badge" class="cert-img">
                     <div class="cert-content">
                         <h4>Introduction to Cybersecurity</h4>
@@ -319,7 +369,7 @@
                         <span class="cert-date">Nov 2024</span>
                     </div>
                 </a>
-                <a href="#" target="_blank" class="cert-card">
+                <a href="https://drive.google.com/file/d/1U_5P-nYv9MQSdk_KpIL57R1kbVxa-Wty/view" target="_blank" class="cert-card">
                     <img src="img/cisco_ai_badge.svg" alt="Introduction to Modern AI Badge" class="cert-img">
                     <div class="cert-content">
                         <h4>Introduction To Modern AI Courses</h4>
@@ -384,8 +434,27 @@
       
     </footer>
 
+    <!-- Certificate Link Modal -->
+    <div id="cert-modal-overlay" class="cert-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title">
+        <div class="cert-modal">
+            <button class="cert-modal-close" id="cert-modal-close" aria-label="Close">✕</button>
+            <div class="cert-modal-icon">🎓</div>
+            <h3 id="cert-modal-title">Certificate Link</h3>
+            <p>Paste your <strong>Google Drive</strong> link below. It will be saved and open when you click the button.</p>
+            <div class="cert-input-wrapper">
+                <input type="url" id="cert-link-input" placeholder="https://drive.google.com/file/d/..." autocomplete="off" spellcheck="false" />
+            </div>
+            <div class="cert-modal-actions">
+                <button id="cert-save-btn" class="btn btn-primary">💾 Save &amp; Open</button>
+                <button id="cert-clear-btn" class="btn btn-secondary">🗑 Clear</button>
+            </div>
+            <p class="cert-modal-hint" id="cert-modal-hint"></p>
+        </div>
+    </div>
+
     <!-- JS -->
     <script src="js/main.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/certificates.js"></script>
 </body>
 </html>
