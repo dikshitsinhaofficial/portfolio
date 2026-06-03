@@ -1,6 +1,96 @@
 /* ============================================
-   BUTTONS
+   ABOUT ME — OVERVIEW CARD
    ============================================ */
+.about-overview-card {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2.8rem;
+    background: var(--glass-bg);
+    border: 1px solid rgba(139, 92, 246, 0.22);
+    border-radius: 28px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.about-overview-card::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -30%;
+    width: 180%;
+    height: 180%;
+    background: radial-gradient(ellipse at center, rgba(139,92,246,0.07) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.about-overview-card:hover {
+    border-color: rgba(139, 92, 246, 0.5);
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(139, 92, 246, 0.14),
+                0 0 0 1px rgba(139, 92, 246, 0.12),
+                0 0 60px rgba(6, 182, 212, 0.06);
+}
+
+.about-quote-mark {
+    font-size: 5rem;
+    line-height: 0.6;
+    color: var(--primary-color);
+    opacity: 0.25;
+    font-family: Georgia, serif;
+    margin-bottom: 1.5rem;
+    display: block;
+    user-select: none;
+}
+
+.about-text {
+    font-size: 1.4rem;
+    line-height: 2;
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0.15px;
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.about-tag {
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    padding: 0.4rem 1.1rem;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: var(--transition);
+}
+
+.about-overview-card:hover .about-tag {
+    background: rgba(139, 92, 246, 0.18);
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+/* ── Online logo cert images (white bg so logos are visible) ── */
+.cert-logo-online {
+    background: rgba(255, 255, 255, 0.96) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding: 10px !important;
+    object-fit: contain !important;
+}
+
 .btn {
     display: inline-flex;
     align-items: center;
@@ -502,6 +592,42 @@ body.light-mode .form-group input:focus, body.light-mode .form-group textarea:fo
 .btn-cert.cert-saved:hover {
     box-shadow: 0 8px 22px rgba(16, 185, 129, 0.3);
 }
+
+/* ── Live button ── */
+.btn-live {
+    background: var(--glass-bg);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.btn-live::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(6,182,212,0.1));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.btn-live:hover {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(16, 185, 129, 0.35);
+}
+
+.btn-live:hover::before { opacity: 1; }
 
 /* ============================================
    CERTIFICATE MODAL OVERLAY

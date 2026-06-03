@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="mongoBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0d2137"/>
+    </linearGradient>
+    <linearGradient id="leafGrad" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#00ED64"/>
+      <stop offset="100%" stop-color="#00684A"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="18" fill="url(#mongoBg)"/>
+
+  <!-- MongoDB leaf/flame shape -->
+  <path d="M100 22 C100 22 72 55 68 88 C64 118 76 138 100 152 C124 138 136 118 132 88 C128 55 100 22 100 22 Z" fill="url(#leafGrad)"/>
+  <!-- Leaf highlight -->
+  <path d="M100 30 C100 30 84 58 81 85 C79 103 85 120 100 132 C100 132 100 50 100 30 Z" fill="rgba(255,255,255,0.12)"/>
+  <!-- Stem -->
+  <rect x="97" y="150" width="6" height="24" rx="3" fill="#00ED64"/>
+
+  <!-- MongoDB text -->
+  <text x="100" y="190" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="white" letter-spacing="1">MongoDB</text>
+</svg>
