@@ -147,7 +147,7 @@ https://portfolio-by-dikshit.vercel.app/
 
 ## Dikshit Sinha
 
-* Email: [dikshitsinha186@gmail.com](mailto:dikshitsinha186@gmail.com)
+* Email: [dikshitsinha2005@gmail.com](mailto:dikshitsinha2005@gmail.com)
 * LinkedIn: https://www.linkedin.com/in/dikshitsinha321
 * GitHub: https://github.com/dikshitsinhaofficial
 

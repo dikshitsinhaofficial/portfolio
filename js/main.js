@@ -32,19 +32,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ─── Theme Toggle ────────────────────────────────────────
     const themeToggle = document.getElementById('theme-toggle');
+    const thumbIcon   = themeToggle ? themeToggle.querySelector('.thumb-icon') : null;
     const body        = document.body;
 
-    if (localStorage.getItem('theme') === 'light') {
-        body.classList.add('light-mode');
-        themeToggle.textContent = '🌙';
+    function updateToggleState(isLight) {
+        if (isLight) {
+            body.classList.add('light-mode');
+            if (thumbIcon) thumbIcon.textContent = '🌙';
+        } else {
+            body.classList.remove('light-mode');
+            if (thumbIcon) thumbIcon.textContent = '☀️';
+        }
     }
 
-    themeToggle.addEventListener('click', () => {
-        body.classList.toggle('light-mode');
-        const isLight = body.classList.contains('light-mode');
-        themeToggle.textContent = isLight ? '🌙' : '☀️';
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
+    if (localStorage.getItem('theme') === 'light') {
+        updateToggleState(true);
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const isLight = !body.classList.contains('light-mode');
+            updateToggleState(isLight);
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
+    }
 
     // ─── Contact Form ─────────────────────────────────────────
     const contactForm = document.getElementById('contact-form');
@@ -170,5 +181,5 @@ function openMailtoFallback({ name, email, message }) {
     const body    = encodeURIComponent(
         `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
     );
-    window.location.href = `mailto:dikshitsinha186@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:dikshitsinha2005@gmail.com?subject=${subject}&body=${body}`;
 }
