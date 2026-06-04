@@ -188,7 +188,7 @@ body.light-mode .navbar.scrolled {
 /* ============================================
    3D TILT INTEGRITY
    ============================================ */
-.project-card, .achievement-card, .cert-card {
+.project-card, .achievement-card, .cert-card, .about-overview-card {
     transform-style: preserve-3d;
     will-change: transform;
 }

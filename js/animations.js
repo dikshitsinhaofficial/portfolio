@@ -86,9 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     // ============================================
-    // 5. 3D TILT EFFECT ON CARDS
+    // 5. 3D TILT & SPOTLIGHT GLOW EFFECT ON CARDS
     // ============================================
-    document.querySelectorAll('.project-card, .achievement-card, .cert-card').forEach(card => {
+    document.querySelectorAll('.project-card, .achievement-card, .cert-card, .about-overview-card').forEach(card => {
         card.addEventListener('mousemove', e => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width  / 2;
@@ -96,6 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const rotX = (-y / rect.height) * 8;
             const rotY = ( x / rect.width)  * 8;
             card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
+
+            // For the About card spotlight tracker
+            if (card.classList.contains('about-overview-card')) {
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${mouseX}px`);
+                card.style.setProperty('--mouse-y', `${mouseY}px`);
+            }
         });
         card.addEventListener('mouseleave', () => {
             card.style.transform = '';
