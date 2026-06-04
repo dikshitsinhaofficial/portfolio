@@ -80,10 +80,13 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled    = true;
         statusDiv.style.display = 'none';
 
-        // ── Strategy 1: Local Express server (localhost with node server.js)
-        const sentViaServer = await trySendViaServer({ name, email, message });
-        if (sentViaServer) {
+        // ── Strategy 1: FormSubmit (direct to email, no signup keys required)
+        const sentViaFormSubmit = await trySendViaFormSubmit({ name, email, message });
+        if (sentViaFormSubmit) {
             showStatus(statusDiv, '✅ Message sent successfully!', 'var(--accent)');
+            // Attempt to save to local database in background if running
+            trySendViaServer({ name, email, message });
+
             contactForm.reset();
             submitBtn.textContent = 'Send Message';
             submitBtn.disabled    = false;
@@ -100,7 +103,17 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // ── Strategy 3: mailto fallback — always works, opens email client
+        // ── Strategy 3: Local Express server (localhost with node server.js)
+        const sentViaServer = await trySendViaServer({ name, email, message });
+        if (sentViaServer) {
+            showStatus(statusDiv, '✅ Message saved locally!', 'var(--accent)');
+            contactForm.reset();
+            submitBtn.textContent = 'Send Message';
+            submitBtn.disabled    = false;
+            return;
+        }
+
+        // ── Strategy 4: mailto fallback — always works, opens email client
         openMailtoFallback({ name, email, message });
         showStatus(
             statusDiv,
@@ -112,6 +125,28 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.textContent = 'Send Message';
         submitBtn.disabled    = false;
     });
+
+    // First-time FormSubmit Activation Handler
+    const activateLink = document.getElementById('activate-form-link');
+    if (activateLink) {
+        activateLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const tempForm = document.createElement('form');
+            tempForm.action = 'https://formsubmit.co/dikshitsinha2005@gmail.com';
+            tempForm.method = 'POST';
+            tempForm.target = '_blank';
+            
+            const tempInput = document.createElement('input');
+            tempInput.type = 'hidden';
+            tempInput.name = 'message';
+            tempInput.value = 'Activation request from portfolio site.';
+            
+            tempForm.appendChild(tempInput);
+            document.body.appendChild(tempForm);
+            tempForm.submit();
+            document.body.removeChild(tempForm);
+        });
+    }
 });
 
 /* ── Helpers ──────────────────────────────────────────────── */
@@ -168,6 +203,33 @@ async function trySendViaEmailJS(data) {
         return true;
     } catch (err) {
         console.error('EmailJS error:', err);
+        return false;
+    }
+}
+
+/**
+ * Send via FormSubmit.co (direct to email, no signup required).
+ */
+async function trySendViaFormSubmit(data) {
+    try {
+        const response = await fetch("https://formsubmit.co/ajax/dikshitsinha2005@gmail.com", {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                name: data.name,
+                email: data.email,
+                message: data.message,
+                _subject: `New Portfolio Message from ${data.name}`
+            })
+        });
+        if (!response.ok) return false;
+        const result = await response.json();
+        return result.success === "true" || result.success === true;
+    } catch (err) {
+        console.error("FormSubmit error:", err);
         return false;
     }
 }
