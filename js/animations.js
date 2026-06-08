@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     // 3. INTERSECTION OBSERVER — SCROLL FADE IN
     // ============================================
-    const faders = document.querySelectorAll('.section, .skill-card, .project-card, .achievement-card, .cert-card, .education-grid > div');
+    const faders = document.querySelectorAll('.section, .skill-card, .project-card, .achievement-card, .cert-card, .education-grid > div, .contact-wrapper .form-group, .contact-wrapper button');
     const appearOptions = { threshold: 0.1, rootMargin: '0px 0px -60px 0px' };
     const appearOnScroll = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {

@@ -216,3 +216,42 @@ body.light-mode .navbar.scrolled {
     0%   { opacity: 0; transform: translateY(40px) scale(0.95); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* ============================================
+   CONTACT FORM INTERACTIONS
+   ============================================ */
+.contact-wrapper .form-group {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-wrapper .form-group:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2); /* using accent color placeholder */
+}
+
+.contact-wrapper button {
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+
+.contact-wrapper button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, var(--primary-color), var(--accent), var(--primary-color));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: inherit;
+}
+
+.contact-wrapper button:hover::after {
+    opacity: 0.4;
+    animation: buttonPulse 2s infinite;
+}
+
+@keyframes buttonPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
